@@ -1,0 +1,121 @@
+2026-08-18 12:06:49,996 [INFO] src.tmdb_pipeline.api_utils: Skipping invalid movie id 0
+2026-08-18 12:06:49,996 [INFO] src.tmdb_pipeline.api_utils: Fetching 18 movie id(s) missing from cache: [299534, 19995, 140607, 299536, 597, 135397, 420818, 24428, 168259, 99861, 284054, 12445, 181808, 330457, 351286, 109445, 321612, 260513]
+2026-08-18 12:06:49,996 [WARNING] src.tmdb_pipeline.api_utils: TMDB API key is not configured; falling back to cached sample data
+2026-08-18 12:06:49,996 [INFO] src.tmdb_pipeline.api_utils: No cache available and API unreachable; falling back to sample payloads
+2026-08-18 12:06:49,997 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 13 records
+2026-08-18 12:06:49,998 [INFO] src.tmdb_pipeline.processing: Wrote 13 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:06:55,851 [INFO] src.tmdb_pipeline.processing: Dropping irrelevant columns: ['adult', 'imdb_id', 'original_title', 'video', 'homepage']
+2026-08-18 12:07:03,808 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:07:05,923 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:07:06,459 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 11 rows
+2026-08-18 12:07:09,954 [INFO] src.tmdb_pipeline.processing: Wrote cleaned dataset to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/clean_movies.csv
+2026-08-18 12:07:09,955 [INFO] src.tmdb_pipeline.analysis: Building KPI rankings
+2026-08-18 12:07:22,173 [INFO] src.tmdb_pipeline.visualization: Saved 5 plots to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/reports/plots
+2026-08-18 12:07:34,255 [INFO] run_pipeline: Wrote report to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/reports/movie_analysis_report.md
+2026-08-18 12:07:35,204 [INFO] run_pipeline: Spark session stopped
+2026-08-18 12:08:12,142 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:12,143 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:25,873 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:27,813 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:28,443 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:31,536 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:31,536 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:34,181 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:35,220 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:35,611 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:36,761 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:36,761 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:38,278 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:39,588 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:40,102 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:40,104 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:40,104 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:41,397 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:41,844 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:42,228 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:42,228 [INFO] src.tmdb_pipeline.analysis: Building KPI rankings
+2026-08-18 12:08:45,542 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:45,543 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:47,364 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:47,943 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:48,189 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:48,541 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:48,542 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:49,537 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:49,898 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:50,144 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:50,452 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:50,452 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:52,305 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:52,742 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:52,966 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:54,062 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:54,062 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:55,293 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:55,638 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:55,809 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:56,657 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:56,657 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:08:57,508 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:08:57,886 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:08:58,056 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:08:59,095 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:08:59,096 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:09:00,164 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:09:00,478 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:09:00,663 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:09:01,137 [WARNING] src.tmdb_pipeline.api_utils: TMDB API key is not configured; falling back to cached sample data
+2026-08-18 12:09:01,143 [INFO] src.tmdb_pipeline.api_utils: Using cached payloads from /private/var/folders/m6/_zd7b8lj4xndnm1gmxvwxbdm0000gn/T/pytest-of-rodney/pytest-3/test_fetch_movie_batch_skips_n0/raw_payloads.json
+2026-08-18 12:09:01,143 [INFO] src.tmdb_pipeline.api_utils: Skipping invalid movie id 0
+2026-08-18 12:09:01,143 [INFO] src.tmdb_pipeline.api_utils: Skipping invalid movie id -5
+2026-08-18 12:09:01,143 [INFO] src.tmdb_pipeline.api_utils: Returning cached payloads for 1 movies
+2026-08-18 12:09:01,144 [INFO] src.tmdb_pipeline.api_utils: Using cached payloads from /private/var/folders/m6/_zd7b8lj4xndnm1gmxvwxbdm0000gn/T/pytest-of-rodney/pytest-3/test_fetch_movie_batch_uses_ca0/raw_payloads.json
+2026-08-18 12:09:01,144 [INFO] src.tmdb_pipeline.api_utils: Returning cached payloads for 1 movies
+2026-08-18 12:09:01,145 [INFO] src.tmdb_pipeline.api_utils: Fetching 1 movie id(s) missing from cache: [7]
+2026-08-18 12:09:01,145 [WARNING] src.tmdb_pipeline.api_utils: TMDB API key is not configured; falling back to cached sample data
+2026-08-18 12:09:01,145 [INFO] src.tmdb_pipeline.api_utils: No cache available and API unreachable; falling back to sample payloads
+2026-08-18 12:09:01,145 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:09:01,145 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:09:01,973 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:09:02,249 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:09:02,400 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:09:02,617 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:09:02,618 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:09:04,048 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:09:04,666 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:09:05,100 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:09:05,107 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:09:05,108 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:09:06,067 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:09:06,445 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:09:06,610 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:09:07,068 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:09:07,068 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:09:07,890 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:09:08,270 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:09:08,489 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:09:08,672 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:09:08,672 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:09:10,590 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:09:11,074 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:09:11,397 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:09:11,654 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 6 records
+2026-08-18 12:09:11,655 [INFO] src.tmdb_pipeline.processing: Wrote 6 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:09:12,436 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:09:12,819 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:09:13,107 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 4 rows
+2026-08-18 12:10:16,799 [INFO] src.tmdb_pipeline.api_utils: Skipping invalid movie id 0
+2026-08-18 12:10:16,800 [INFO] src.tmdb_pipeline.api_utils: Fetching 18 movie id(s) missing from cache: [299534, 19995, 140607, 299536, 597, 135397, 420818, 24428, 168259, 99861, 284054, 12445, 181808, 330457, 351286, 109445, 321612, 260513]
+2026-08-18 12:10:16,800 [WARNING] src.tmdb_pipeline.api_utils: TMDB API key is not configured; falling back to cached sample data
+2026-08-18 12:10:16,800 [INFO] src.tmdb_pipeline.api_utils: No cache available and API unreachable; falling back to sample payloads
+2026-08-18 12:10:16,801 [INFO] src.tmdb_pipeline.processing: Starting data cleaning for 13 records
+2026-08-18 12:10:16,801 [INFO] src.tmdb_pipeline.processing: Wrote 13 raw movie records to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/raw_movies.jsonl for Spark ingestion
+2026-08-18 12:10:22,928 [INFO] src.tmdb_pipeline.processing: Dropping irrelevant columns: ['adult', 'imdb_id', 'original_title', 'video', 'homepage']
+2026-08-18 12:10:30,283 [INFO] src.tmdb_pipeline.processing: Dropped 1 sparse rows with fewer than 10 populated columns
+2026-08-18 12:10:33,119 [INFO] src.tmdb_pipeline.processing: Dropped 1 non-Released rows
+2026-08-18 12:10:33,916 [INFO] src.tmdb_pipeline.processing: Cleaning completed with 11 rows
+2026-08-18 12:10:36,671 [INFO] src.tmdb_pipeline.processing: Wrote cleaned dataset to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/data/clean_movies.csv
+2026-08-18 12:10:36,674 [INFO] src.tmdb_pipeline.analysis: Building KPI rankings
+2026-08-18 12:10:45,262 [INFO] src.tmdb_pipeline.visualization: Saved 5 plots to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/reports/plots
+2026-08-18 12:10:54,679 [INFO] run_pipeline: Wrote report to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Batch/reports/movie_analysis_report.md
+2026-08-18 12:10:55,682 [INFO] run_pipeline: Spark session stopped
