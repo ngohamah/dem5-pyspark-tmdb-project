@@ -3,9 +3,13 @@
 Centralizing paths, API settings, and column lists here means the rest of
 the pipeline never hard-codes a literal path or constant inline.
 """
+import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parents[2]
+load_dotenv(BASE_DIR / ".env")
 DATA_DIR = BASE_DIR / "data"
 LOG_DIR = BASE_DIR / "logs"
 
@@ -17,10 +21,11 @@ CLEAN_DATA_PATH = DATA_DIR / "clean_movies.csv"
 REPORT_PATH = BASE_DIR / "reports" / "movie_analysis_report.md"
 PLOTS_DIR = BASE_DIR / "reports" / "plots"
 
-# Replace with a real TMDB API key (https://www.themoviedb.org/settings/api).
-# Left as a placeholder, the pipeline logs a warning and falls back to the
-# bundled sample payloads so it still runs end-to-end offline.
-TMDB_API_KEY = "YOUR_TMDB_API_KEY"
+# Set TMDB_API_KEY in a local .env file (see .env.example) or the shell
+# environment -- never hard-code a real key here, since this file is
+# tracked in git. Left unset, the pipeline logs a warning and falls back
+# to the bundled sample payloads so it still runs end-to-end offline.
+TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "YOUR_TMDB_API_KEY")
 TMDB_API_URL = "https://api.themoviedb.org/3/movie/{movie_id}"
 # append_to_response=credits pulls cast/crew in the same request as the
 # movie details, so each movie only costs a single API call.

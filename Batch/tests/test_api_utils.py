@@ -7,7 +7,8 @@ import requests
 from src.tmdb_pipeline import api_utils
 
 
-def test_fetch_movie_payload_raises_without_a_configured_api_key():
+def test_fetch_movie_payload_raises_without_a_configured_api_key(monkeypatch):
+    monkeypatch.setattr(api_utils, "TMDB_API_KEY", "YOUR_TMDB_API_KEY")
     with pytest.raises(ValueError):
         api_utils.fetch_movie_payload(requests.Session(), 123)
 
