@@ -7,14 +7,28 @@ collect to a pandas DataFrame and process with ordinary, testable Python.
 """
 from __future__ import annotations
 
+import csv
+
 from pyspark.sql import DataFrame
 
-from .config import REJECTED_DIR
+from .config import BATCH_ROW_COUNTS_PATH, REJECTED_DIR
 from .db import INSERT_COLUMNS, insert_events
 from .logger_config import configure_logger
 from .transform import reduce_reasons_to_counts
 
 logger = configure_logger(__name__)
+
+_ROW_COUNTS_HEADER = ["batch_id", "received", "inserted", "rejected"]
+
+
+def _record_row_counts(batch_id: int, received: int, inserted: int, rejected: int) -> None:
+    BATCH_ROW_COUNTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    is_new_file = not BATCH_ROW_COUNTS_PATH.exists()
+    with BATCH_ROW_COUNTS_PATH.open("a", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        if is_new_file:
+            writer.writerow(_ROW_COUNTS_HEADER)
+        writer.writerow([batch_id, received, inserted, rejected])
 
 
 def _write_rejected_rows(invalid_rows, batch_id: int) -> None:
@@ -45,6 +59,7 @@ def write_micro_batch(batch_df: DataFrame, batch_id: int) -> None:
     if not invalid_rows.empty:
         _write_rejected_rows(invalid_rows, batch_id)
 
+    _record_row_counts(batch_id, len(pdf), inserted, len(invalid_rows))
     logger.info(
         "Batch %d complete: %d row(s) received, %d inserted, %d rejected",
         batch_id, len(pdf), inserted, len(invalid_rows),

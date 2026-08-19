@@ -21,6 +21,11 @@ REJECTED_DIR = DATA_DIR / "rejected"
 CHECKPOINT_DIR = BASE_DIR / "checkpoints" / "events"
 LOG_DIR = BASE_DIR / "logs"
 METRICS_LOG_PATH = LOG_DIR / "batch_metrics.csv"
+# Ground-truth row counts per micro-batch (received/inserted/rejected), written
+# by the sink itself. Spark's own progress metrics (METRICS_LOG_PATH) report
+# numInputRows with a small, cosmetic off-by-one vs. what the sink actually
+# saw -- this file is what performance_metrics.md is built from.
+BATCH_ROW_COUNTS_PATH = LOG_DIR / "batch_row_counts.csv"
 
 REPORTS_DIR = BASE_DIR / "reports"
 PLOTS_DIR = REPORTS_DIR / "plots"
