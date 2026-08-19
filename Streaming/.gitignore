@@ -11,7 +11,6 @@ __pycache__/
 # Runtime data: generated CSVs, Spark checkpoint state, rejected-row dumps.
 # Keep the directories (via .gitkeep) but not their contents.
 data/incoming/*.csv
-data/archive/*.csv
 data/rejected/*.csv
 checkpoints/*
 !checkpoints/.gitkeep

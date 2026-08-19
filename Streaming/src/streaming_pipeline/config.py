@@ -15,7 +15,6 @@ load_dotenv(BASE_DIR / ".env")
 
 DATA_DIR = BASE_DIR / "data"
 INCOMING_DIR = DATA_DIR / "incoming"
-ARCHIVE_DIR = DATA_DIR / "archive"
 REJECTED_DIR = DATA_DIR / "rejected"
 
 CHECKPOINT_DIR = BASE_DIR / "checkpoints" / "events"
