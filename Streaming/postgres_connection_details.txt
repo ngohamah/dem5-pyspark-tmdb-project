@@ -1,0 +1,25 @@
+PostgreSQL connection details -- Real-Time Streaming Pipeline
+================================================================
+
+Host:     localhost
+Port:     5432
+Database: streaming_events
+User:     streaming_app
+Password: NOT STORED IN THIS FILE -- see below
+
+Why the password isn't here
+----------------------------
+This file is tracked in git. Committing a real password to version control
+means anyone with repo access (now or in the git history, forever) has a
+working database credential. Instead:
+
+1. Run `postgres_setup.sql` once as a Postgres superuser to create the
+   `streaming_app` role and the `streaming_events` database/table.
+2. Set that role's password locally:
+       ALTER ROLE streaming_app WITH PASSWORD 'your-local-password';
+3. Copy `.env.example` to `.env` and fill in the same password. `.env` is
+   listed in .gitignore, so it never gets committed.
+
+config.py loads `.env` automatically (via python-dotenv) and every script
+in this project reads its Postgres connection info from there -- nothing
+in the codebase hard-codes a password.
