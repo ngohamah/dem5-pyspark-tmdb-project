@@ -98,3 +98,15 @@ def test_insert_events_skips_duplicate_event_ids(event_id):
     second = insert_events([row])
     assert first == 1
     assert second == 0
+
+
+def test_insert_events_raises_and_logs_when_the_database_is_unreachable(monkeypatch, caplog):
+    import src.streaming_pipeline.db as db_module
+
+    monkeypatch.setattr(db_module, "POSTGRES_HOST", "127.0.0.1")
+    monkeypatch.setattr(db_module, "POSTGRES_PORT", 59999)  # nothing listens here
+
+    with pytest.raises(psycopg2.OperationalError):
+        insert_events([_sample_row(str(uuid.uuid4()))])
+
+    assert "Failed to insert" in caplog.text

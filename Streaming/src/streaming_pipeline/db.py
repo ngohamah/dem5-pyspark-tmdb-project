@@ -68,8 +68,8 @@ def insert_events(rows: list[dict[str, Any]], conn=None) -> int:
         return 0
 
     owns_connection = conn is None
-    conn = conn or get_connection()
     try:
+        conn = conn or get_connection()
         with conn.cursor() as cur:
             query = f"""
                 INSERT INTO {POSTGRES_TABLE} ({", ".join(INSERT_COLUMNS)})
@@ -82,9 +82,10 @@ def insert_events(rows: list[dict[str, Any]], conn=None) -> int:
         logger.info("Inserted %d/%d row(s) into %s", inserted, len(rows), POSTGRES_TABLE)
         return inserted
     except Exception:
-        conn.rollback()
+        if conn is not None:
+            conn.rollback()
         logger.exception("Failed to insert %d row(s) into %s; transaction rolled back", len(rows), POSTGRES_TABLE)
         raise
     finally:
-        if owns_connection:
+        if owns_connection and conn is not None:
             conn.close()
