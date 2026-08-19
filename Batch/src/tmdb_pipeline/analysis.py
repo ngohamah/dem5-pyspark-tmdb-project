@@ -29,15 +29,28 @@ def rank_movies(df: DataFrame, metric: str, ascending: bool = False, top_n: int 
     :func:`build_rankings` calls it instead of re-implementing sort/limit.
     """
     if metric not in df.columns:
+        logger.error("Metric '%s' not found in dataframe columns: %s", metric, df.columns)
         raise KeyError(f"Metric '{metric}' not found in dataframe")
 
     order_col = F.col(metric).asc_nulls_last() if ascending else F.col(metric).desc_nulls_last()
-    window = Window.orderBy(order_col)
 
+    # Order and limit the dataframe first to avoid applying a global Window
+    # over the entire dataset (which forces a single-partition shuffle and
+    # triggers repeated WindowExec warnings). Operating on the small limited
+    # set is more efficient for top-N rankings.
+    ordered = df.orderBy(order_col)
     total = df.count()
-    ranked = df.withColumn("rank", F.row_number().over(window))
+    limited = ordered.limit(top_n)
+
+    # partitionBy(lit(1)) is a no-op for the actual grouping (every row shares
+    # the same key, so all rows still land in one partition) but it keeps
+    # Spark's partitionSpec non-empty, which silences the "No Partition
+    # Defined for Window operation" WARN that Window.orderBy() alone triggers
+    # regardless of how small the (already limited) input is.
+    window = Window.partitionBy(F.lit(1)).orderBy(order_col)
+    ranked = limited.withColumn("rank", F.row_number().over(window))
     ranked = ranked.withColumn("rank_label", _rank_label(F.col("rank"), F.lit(total)))
-    return ranked.filter(F.col("rank") <= top_n).orderBy("rank")
+    return ranked.orderBy("rank")
 
 
 def build_rankings(df: DataFrame) -> dict[str, DataFrame]:
