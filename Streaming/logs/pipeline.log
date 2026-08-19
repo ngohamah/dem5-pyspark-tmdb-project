@@ -1,0 +1,100 @@
+2026-08-19 17:36:30,702 [INFO] data_generator: Starting data generator (num_files=25, events_per_file=30, interval=3.0s, seed=7)
+2026-08-19 17:36:30,702 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_742d7a9915ed470fbd4c021091b8ecd1.csv
+2026-08-19 17:36:33,706 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_6cb1e87afaf04c4790cd82f4edd5ca41.csv
+2026-08-19 17:36:36,716 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_56de8002cf334aadbbde8eaaef211078.csv
+2026-08-19 17:36:39,722 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_019e87ea345044029a19e8ddfca9b529.csv
+2026-08-19 17:36:42,729 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_9cc01f19444844ce896dec3ac2baecf9.csv
+2026-08-19 17:36:45,739 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_99a7f01b17f9406d8fdf345e322577e8.csv
+2026-08-19 17:36:48,744 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_63681d3fb14146208e0f3939c65d4a99.csv
+2026-08-19 17:36:51,749 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_f221e5ba19ed4819bbb93c0affcfb29d.csv
+2026-08-19 17:36:54,754 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_85d162a997cc411aa75c4ead30e572bb.csv
+2026-08-19 17:36:55,771 [INFO] src.streaming_pipeline.metrics: Streaming query started: id=9264939f-620e-4558-b19e-e6407a05b172 name=None
+2026-08-19 17:36:55,775 [INFO] spark_streaming_to_postgres: Streaming query started (once=False, watching /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming)
+2026-08-19 17:36:57,757 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_6eec11b1c41d4dbd886d0d96cf4556fc.csv
+2026-08-19 17:37:00,763 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_4ee51300973e43169fe5b416499a9643.csv
+2026-08-19 17:37:02,343 [INFO] src.streaming_pipeline.db: Inserted 29/29 row(s) into events
+2026-08-19 17:37:02,352 [WARNING] src.streaming_pipeline.sink: Batch 0: dropped 1 invalid row(s), reasons={'invalid_quantity': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_0.csv
+2026-08-19 17:37:02,353 [INFO] src.streaming_pipeline.sink: Batch 0 complete: 30 row(s) received, 29 inserted, 1 rejected
+2026-08-19 17:37:02,918 [INFO] src.streaming_pipeline.metrics: Batch 0: input_rows=31 rows/sec=0.00 processed_rows/sec=4.59 duration_ms=6746
+2026-08-19 17:37:03,765 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_630951f56f0e43ebb7fce8a798198a11.csv
+2026-08-19 17:37:04,452 [INFO] src.streaming_pipeline.db: Inserted 29/29 row(s) into events
+2026-08-19 17:37:04,454 [WARNING] src.streaming_pipeline.sink: Batch 1: dropped 1 invalid row(s), reasons={'invalid_quantity': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_1.csv
+2026-08-19 17:37:04,454 [INFO] src.streaming_pipeline.sink: Batch 1 complete: 30 row(s) received, 29 inserted, 1 rejected
+2026-08-19 17:37:04,873 [INFO] src.streaming_pipeline.metrics: Batch 1: input_rows=31 rows/sec=4.56 processed_rows/sec=15.71 duration_ms=1972
+2026-08-19 17:37:06,631 [INFO] src.streaming_pipeline.db: Inserted 30/30 row(s) into events
+2026-08-19 17:37:06,631 [INFO] src.streaming_pipeline.sink: Batch 2 complete: 30 row(s) received, 30 inserted, 0 rejected
+2026-08-19 17:37:06,771 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_c50d37959672469495c4521296d22cfc.csv
+2026-08-19 17:37:07,023 [INFO] src.streaming_pipeline.metrics: Batch 2: input_rows=31 rows/sec=13.72 processed_rows/sec=16.47 duration_ms=1882
+2026-08-19 17:37:09,775 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_53930259301e4756b7f48e2f85e5db7a.csv
+2026-08-19 17:37:11,323 [INFO] src.streaming_pipeline.db: Inserted 30/30 row(s) into events
+2026-08-19 17:37:11,324 [INFO] src.streaming_pipeline.sink: Batch 3 complete: 30 row(s) received, 30 inserted, 0 rejected
+2026-08-19 17:37:11,831 [INFO] src.streaming_pipeline.metrics: Batch 3: input_rows=31 rows/sec=6.19 processed_rows/sec=19.30 duration_ms=1605
+2026-08-19 17:37:12,976 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_b318070fa72743f0a57a08e72537557f.csv
+2026-08-19 17:37:15,980 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_45a6b08c64024a918f5fc22655238952.csv
+2026-08-19 17:37:16,345 [INFO] src.streaming_pipeline.db: Inserted 28/28 row(s) into events
+2026-08-19 17:37:16,347 [WARNING] src.streaming_pipeline.sink: Batch 4: dropped 2 invalid row(s), reasons={'invalid_event_type': 1, 'invalid_price': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_4.csv
+2026-08-19 17:37:16,347 [INFO] src.streaming_pipeline.sink: Batch 4 complete: 30 row(s) received, 28 inserted, 2 rejected
+2026-08-19 17:37:16,735 [INFO] src.streaming_pipeline.metrics: Batch 4: input_rows=31 rows/sec=6.20 processed_rows/sec=19.27 duration_ms=1607
+2026-08-19 17:37:18,990 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_c8ae4096eb2a499fa473675fb3fe45dd.csv
+2026-08-19 17:37:21,767 [INFO] src.streaming_pipeline.db: Inserted 26/26 row(s) into events
+2026-08-19 17:37:21,769 [WARNING] src.streaming_pipeline.sink: Batch 5: dropped 4 invalid row(s), reasons={'missing_product_id': 1, 'invalid_quantity': 1, 'invalid_event_time': 1, 'invalid_event_type': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_5.csv
+2026-08-19 17:37:21,769 [INFO] src.streaming_pipeline.sink: Batch 5 complete: 30 row(s) received, 26 inserted, 4 rejected
+2026-08-19 17:37:21,992 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_dc5be4a877254594ad9f1c747ce3aff8.csv
+2026-08-19 17:37:22,182 [INFO] src.streaming_pipeline.metrics: Batch 5: input_rows=31 rows/sec=6.21 processed_rows/sec=15.23 duration_ms=2035
+2026-08-19 17:37:24,999 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_0356c2e811e54201987d26b1fa24d6f9.csv
+2026-08-19 17:37:26,073 [INFO] src.streaming_pipeline.db: Inserted 28/28 row(s) into events
+2026-08-19 17:37:26,073 [WARNING] src.streaming_pipeline.sink: Batch 6: dropped 2 invalid row(s), reasons={'invalid_event_type': 2} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_6.csv
+2026-08-19 17:37:26,073 [INFO] src.streaming_pipeline.sink: Batch 6 complete: 30 row(s) received, 28 inserted, 2 rejected
+2026-08-19 17:37:26,460 [INFO] src.streaming_pipeline.metrics: Batch 6: input_rows=31 rows/sec=6.20 processed_rows/sec=23.47 duration_ms=1320
+2026-08-19 17:37:28,004 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_001cbb64929e4ea5a820db95d8084402.csv
+2026-08-19 17:37:31,011 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_9358cc72a61b44c1946c57769f714822.csv
+2026-08-19 17:37:31,433 [INFO] src.streaming_pipeline.db: Inserted 27/27 row(s) into events
+2026-08-19 17:37:31,435 [WARNING] src.streaming_pipeline.sink: Batch 7: dropped 3 invalid row(s), reasons={'invalid_event_type': 2, 'missing_product_id': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_7.csv
+2026-08-19 17:37:31,435 [INFO] src.streaming_pipeline.sink: Batch 7 complete: 30 row(s) received, 27 inserted, 3 rejected
+2026-08-19 17:37:31,838 [INFO] src.streaming_pipeline.metrics: Batch 7: input_rows=31 rows/sec=6.20 processed_rows/sec=18.27 duration_ms=1697
+2026-08-19 17:37:34,015 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_434cfd2b9698482fa303337e36fb75d6.csv
+2026-08-19 17:37:36,416 [INFO] src.streaming_pipeline.db: Inserted 28/28 row(s) into events
+2026-08-19 17:37:36,417 [WARNING] src.streaming_pipeline.sink: Batch 8: dropped 2 invalid row(s), reasons={'invalid_event_type': 1, 'invalid_price': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_8.csv
+2026-08-19 17:37:36,418 [INFO] src.streaming_pipeline.sink: Batch 8 complete: 30 row(s) received, 28 inserted, 2 rejected
+2026-08-19 17:37:36,933 [INFO] src.streaming_pipeline.metrics: Batch 8: input_rows=31 rows/sec=6.20 processed_rows/sec=17.38 duration_ms=1783
+2026-08-19 17:37:37,166 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_52357e7a041c4197ac6c5ce988a6df2b.csv
+2026-08-19 17:37:40,172 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_ae6e0844c089425482d526e561a07db7.csv
+2026-08-19 17:37:41,425 [INFO] src.streaming_pipeline.db: Inserted 29/29 row(s) into events
+2026-08-19 17:37:41,426 [WARNING] src.streaming_pipeline.sink: Batch 9: dropped 1 invalid row(s), reasons={'invalid_quantity': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_9.csv
+2026-08-19 17:37:41,426 [INFO] src.streaming_pipeline.sink: Batch 9 complete: 30 row(s) received, 29 inserted, 1 rejected
+2026-08-19 17:37:41,760 [INFO] src.streaming_pipeline.metrics: Batch 9: input_rows=31 rows/sec=6.20 processed_rows/sec=18.94 duration_ms=1637
+2026-08-19 17:37:43,181 [INFO] src.streaming_pipeline.generator_io: Wrote 30 event(s) to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/incoming/events_ec01c6f9e2134707b6d3b86c49f927e4.csv
+2026-08-19 17:37:43,181 [INFO] data_generator: Data generator finished after writing 25 file(s)
+2026-08-19 17:37:45,908 [INFO] src.streaming_pipeline.db: Inserted 26/26 row(s) into events
+2026-08-19 17:37:45,909 [WARNING] src.streaming_pipeline.sink: Batch 10: dropped 4 invalid row(s), reasons={'invalid_price': 2, 'invalid_event_type': 1, 'invalid_quantity': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_10.csv
+2026-08-19 17:37:45,909 [INFO] src.streaming_pipeline.sink: Batch 10 complete: 30 row(s) received, 26 inserted, 4 rejected
+2026-08-19 17:37:46,215 [INFO] src.streaming_pipeline.metrics: Batch 10: input_rows=31 rows/sec=6.20 processed_rows/sec=28.18 duration_ms=1099
+2026-08-19 17:37:51,259 [INFO] src.streaming_pipeline.db: Inserted 28/28 row(s) into events
+2026-08-19 17:37:51,260 [WARNING] src.streaming_pipeline.sink: Batch 11: dropped 2 invalid row(s), reasons={'invalid_event_time': 2} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_11.csv
+2026-08-19 17:37:51,260 [INFO] src.streaming_pipeline.sink: Batch 11 complete: 30 row(s) received, 28 inserted, 2 rejected
+2026-08-19 17:37:51,622 [INFO] src.streaming_pipeline.metrics: Batch 11: input_rows=31 rows/sec=6.20 processed_rows/sec=20.83 duration_ms=1488
+2026-08-19 17:37:56,030 [INFO] src.streaming_pipeline.db: Inserted 27/27 row(s) into events
+2026-08-19 17:37:56,033 [WARNING] src.streaming_pipeline.sink: Batch 12: dropped 3 invalid row(s), reasons={'invalid_event_type': 1, 'invalid_price': 1, 'invalid_event_time': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_12.csv
+2026-08-19 17:37:56,033 [INFO] src.streaming_pipeline.sink: Batch 12 complete: 30 row(s) received, 27 inserted, 3 rejected
+2026-08-19 17:37:56,557 [INFO] src.streaming_pipeline.metrics: Batch 12: input_rows=31 rows/sec=6.20 processed_rows/sec=21.75 duration_ms=1425
+2026-08-19 17:38:01,169 [INFO] src.streaming_pipeline.db: Inserted 27/27 row(s) into events
+2026-08-19 17:38:01,170 [WARNING] src.streaming_pipeline.sink: Batch 13: dropped 3 invalid row(s), reasons={'invalid_event_type': 1, 'missing_product_id': 1, 'invalid_quantity': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_13.csv
+2026-08-19 17:38:01,170 [INFO] src.streaming_pipeline.sink: Batch 13 complete: 30 row(s) received, 27 inserted, 3 rejected
+2026-08-19 17:38:01,507 [INFO] src.streaming_pipeline.metrics: Batch 13: input_rows=31 rows/sec=6.20 processed_rows/sec=22.51 duration_ms=1376
+2026-08-19 17:38:05,971 [INFO] src.streaming_pipeline.db: Inserted 29/29 row(s) into events
+2026-08-19 17:38:05,972 [WARNING] src.streaming_pipeline.sink: Batch 14: dropped 1 invalid row(s), reasons={'invalid_event_type': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_14.csv
+2026-08-19 17:38:05,972 [INFO] src.streaming_pipeline.sink: Batch 14 complete: 30 row(s) received, 29 inserted, 1 rejected
+2026-08-19 17:38:06,305 [INFO] src.streaming_pipeline.metrics: Batch 14: input_rows=31 rows/sec=6.20 processed_rows/sec=25.77 duration_ms=1203
+2026-08-19 17:38:11,048 [INFO] src.streaming_pipeline.db: Inserted 30/30 row(s) into events
+2026-08-19 17:38:11,048 [INFO] src.streaming_pipeline.sink: Batch 15 complete: 30 row(s) received, 30 inserted, 0 rejected
+2026-08-19 17:38:11,362 [INFO] src.streaming_pipeline.metrics: Batch 15: input_rows=31 rows/sec=6.20 processed_rows/sec=24.78 duration_ms=1251
+2026-08-19 17:38:15,754 [INFO] src.streaming_pipeline.db: Inserted 28/28 row(s) into events
+2026-08-19 17:38:15,757 [WARNING] src.streaming_pipeline.sink: Batch 16: dropped 2 invalid row(s), reasons={'missing_product_id': 1, 'invalid_price': 1} -- wrote them to /Users/rodney/Desktop/AMALITECH/LABS/DEM05/Streaming/data/rejected/rejected_batch_16.csv
+2026-08-19 17:38:15,757 [INFO] src.streaming_pipeline.sink: Batch 16 complete: 30 row(s) received, 28 inserted, 2 rejected
+2026-08-19 17:38:16,057 [INFO] src.streaming_pipeline.metrics: Batch 16: input_rows=31 rows/sec=6.20 processed_rows/sec=31.96 duration_ms=970
+2026-08-19 17:38:20,951 [INFO] src.streaming_pipeline.db: Inserted 30/30 row(s) into events
+2026-08-19 17:38:20,952 [INFO] src.streaming_pipeline.sink: Batch 17 complete: 30 row(s) received, 30 inserted, 0 rejected
+2026-08-19 17:38:21,284 [INFO] src.streaming_pipeline.metrics: Batch 17: input_rows=31 rows/sec=6.20 processed_rows/sec=26.66 duration_ms=1162
+2026-08-19 17:38:25,789 [INFO] spark_streaming_to_postgres: Reached --duration=90.0s; stopping the streaming query
+2026-08-19 17:38:25,862 [INFO] src.streaming_pipeline.metrics: Streaming query terminated normally: id=9264939f-620e-4558-b19e-e6407a05b172
+2026-08-19 17:38:26,317 [INFO] spark_streaming_to_postgres: Spark session stopped
