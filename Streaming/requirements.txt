@@ -1,4 +1,7 @@
 pyspark>=3.5,<3.6
+# pyspark 3.5's toPandas() imports distutils, which Python 3.12 removed from
+# the standard library; setuptools ships a compatible shim.
+setuptools>=70.0.0
 psycopg2-binary>=2.9.0
 python-dotenv>=1.0.0
 pandas>=2.2.0
