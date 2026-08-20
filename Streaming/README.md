@@ -61,7 +61,12 @@ tests/                             pytest unit tests (+ a DB test, skipped if un
 ## Prerequisites
 
 - Python 3.12 (PySpark 3.5 is not yet compatible with newer Python releases)
-- Java 8 or 11 (required by Spark)
+- Java 8 or 11 (required by Spark). **On Apple Silicon, install a native
+  `arm64` build** (e.g. [Eclipse Temurin 11](https://adoptium.net/)) --
+  Java 8 is commonly only available as an x86_64 build there, which runs
+  under Rosetta 2 and breaks native Python extensions like `psycopg2` when
+  Spark loads them inside a worker process (see `sink.py`'s
+  `mapPartitions`-based sink). See [user_guide.md](user_guide.md) for details.
 - PostgreSQL 14+, running locally or reachable over the network
 
 ## Setup
@@ -91,17 +96,27 @@ data to stream.
 
 **Terminal 1 -- generate events continuously:**
 ```bash
-python data_generator.py
+python3 data_generator.py
 ```
 Flags: `--num-files N` (stop after N files), `--events-per-file N` (default
-50), `--interval SECONDS` (default 5), `--seed N` (reproducible output).
+50), `--interval SECONDS` (default 1), `--seed N` (reproducible output).
 
 **Terminal 2 -- stream events into Postgres:**
 ```bash
-python spark_streaming_to_postgres.py
+python3 spark_streaming_to_postgres.py
 ```
 Flags: `--once` (drain every file currently in `data/incoming/`, then exit),
 `--duration SECONDS` (run continuously, then stop automatically).
+
+**Or as a single command** -- generator, streaming job for 90 seconds, and performance
+report/charts, one after another:
+```bash
+python3 data_generator.py --num-files 50 --events-per-file 1800 --seed 42 & sleep 2 && python3 spark_streaming_to_postgres.py --duration 90; wait; python3 generate_performance_report.py
+```
+Regenerates `performance_metrics.md` and `reports/plots/*.png` from just
+this run -- earlier runs' logged batches are automatically excluded, even
+though `logs/batch_metrics.csv`/`logs/batch_row_counts.csv` keep every
+batch ever recorded.
 
 ## Checking the results
 

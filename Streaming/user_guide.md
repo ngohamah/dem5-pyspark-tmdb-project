@@ -3,7 +3,25 @@
 ## 1. Prerequisites
 
 - Python 3.12 (PySpark 3.5 is not yet compatible with newer Python releases)
-- Java 8 or 11 (required by Spark)
+- Java 8 or 11 (required by Spark). **On Apple Silicon, install a native
+  `arm64` build** (e.g. [Eclipse Temurin 11](https://adoptium.net/)) --
+  Java 8 is commonly only available as an x86_64 build there, which runs
+  under Rosetta 2. Since Rosetta translation is inherited by child
+  processes, Spark's Python worker subprocess then also runs under x86_64
+  emulation, and native Python extensions like `psycopg2` -- which the
+  `mapPartitions`-based sink (`sink.py`) imports inside that worker, not
+  just in the driver -- fail to load with an "incompatible architecture"
+  error.
+
+  Once a native `arm64` JDK is installed (e.g. extracted to
+  `~/.jdks/jdk-11.0.32+9`), point your shell at it before running the
+  pipeline or the tests:
+  ```bash
+  export JAVA_HOME="$HOME/.jdks/jdk-11.0.32+9/Contents/Home"
+  export PATH="$JAVA_HOME/bin:$PATH"
+  ```
+  To make this permanent instead of setting it per terminal, append those
+  same two lines to `~/.zshrc` (or your shell's equivalent profile).
 - PostgreSQL 14+ running locally, or reachable over the network
 
 ## 2. Set up the Python environment
