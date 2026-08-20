@@ -75,9 +75,17 @@ def insert_events(rows: list[dict[str, Any]], conn=None) -> int:
                 INSERT INTO {POSTGRES_TABLE} ({", ".join(INSERT_COLUMNS)})
                 VALUES %s
                 ON CONFLICT (event_id) DO NOTHING
+                RETURNING event_id
             """
-            execute_values(cur, query, [_row_to_tuple(row) for row in rows])
-            inserted = cur.rowcount
+            # execute_values pages a large `rows` list into multiple internal
+            # INSERT statements (page_size=100 by default) -- cur.rowcount
+            # afterward would only reflect the last page, not the total.
+            # fetch=True instead concatenates every page's RETURNING rows,
+            # so len() here is accurate regardless of how many pages ran.
+            inserted_ids = execute_values(
+                cur, query, [_row_to_tuple(row) for row in rows], fetch=True,
+            )
+            inserted = len(inserted_ids)
         conn.commit()
         logger.info("Inserted %d/%d row(s) into %s", inserted, len(rows), POSTGRES_TABLE)
         return inserted
