@@ -31,7 +31,11 @@ class MetricsListener(StreamingQueryListener):
 
     def _ensure_header(self) -> None:
         self.metrics_path.parent.mkdir(parents=True, exist_ok=True)
-        if not self.metrics_path.exists():
+        # A zero-byte file still counts as "exists" -- if something external
+        # ever truncates this file (an editor save, a stray shell redirect),
+        # this check must still rewrite the header, or every future run
+        # would silently keep appending headerless rows forever.
+        if not self.metrics_path.exists() or self.metrics_path.stat().st_size == 0:
             with self.metrics_path.open("w", newline="", encoding="utf-8") as f:
                 csv.writer(f).writerow(_METRICS_HEADER)
 

@@ -40,7 +40,11 @@ _ROW_COUNTS_HEADER = ["batch_id", "received", "inserted", "rejected"]
 
 def _record_row_counts(row_counts_path: Path, batch_id: int, received: int, inserted: int, rejected: int) -> None:
     row_counts_path.parent.mkdir(parents=True, exist_ok=True)
-    is_new_file = not row_counts_path.exists()
+    # A zero-byte file still counts as "exists" -- if something external ever
+    # truncates this file (an editor save, a stray shell redirect), this
+    # check must still rewrite the header, or every future batch would
+    # silently keep appending headerless rows forever.
+    is_new_file = not row_counts_path.exists() or row_counts_path.stat().st_size == 0
     with row_counts_path.open("a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         if is_new_file:
