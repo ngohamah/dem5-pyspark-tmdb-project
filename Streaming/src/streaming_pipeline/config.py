@@ -53,7 +53,7 @@ PRODUCT_CATALOG = [
 
 NUM_USERS = 500
 DEFAULT_EVENTS_PER_FILE = 50
-DEFAULT_FILE_INTERVAL_SECONDS = 5.0
+DEFAULT_FILE_INTERVAL_SECONDS = 1.0 # Important to really test the streaming pipeline, since Spark batches micro-batches by time, not by file count.
 
 # Fraction of generated events deliberately corrupted (bad price, missing
 # product id, unknown event type, ...) so the Spark cleaning stage -- and its
