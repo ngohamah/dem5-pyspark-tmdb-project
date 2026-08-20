@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import csv
 import glob
+import re
+from datetime import datetime, timezone
 from functools import reduce
 
 import matplotlib.pyplot as plt
@@ -20,9 +22,11 @@ import pandas as pd
 from src.streaming_pipeline.config import (
     BASE_DIR,
     BATCH_ROW_COUNTS_PATH,
+    MAX_FILES_PER_TRIGGER,
     METRICS_LOG_PATH,
     PLOTS_DIR,
     REJECTED_DIR,
+    STREAM_TRIGGER_INTERVAL,
 )
 from src.streaming_pipeline.transform import reduce_reasons_to_counts
 
@@ -30,17 +34,59 @@ REPORT_PATH = BASE_DIR / "performance_metrics.md"
 THROUGHPUT_PLOT_PATH = PLOTS_DIR / "throughput_per_batch.png"
 LATENCY_PLOT_PATH = PLOTS_DIR / "batch_latency.png"
 
+# logs/batch_metrics.csv and logs/batch_row_counts.csv are append-only across
+# every run ever executed against the checkpoint in checkpoints/events/ --
+# Structured Streaming resumes batch numbering from the checkpoint rather
+# than resetting to 0, so a second run's rows land in the same files as the
+# first's. A gap between two consecutive batches' timestamps this much
+# larger than a normal trigger interval means the pipeline was stopped and
+# later restarted with new arguments; anything before the most recent such
+# gap belongs to an earlier run and is excluded from this report.
+_RUN_GAP_THRESHOLD_SECONDS = 30
+_REJECTED_FILENAME_RE = re.compile(r"rejected_batch_(\d+)(?:_part_\d+)?\.csv$")
+_METRICS_COLUMNS = ("batch_id", "timestamp", "batch_duration_ms", "processed_rows_per_second")
+_ROW_COUNTS_COLUMNS = ("batch_id", "received", "inserted", "rejected")
 
-def _read_csv_rows(path) -> list[dict]:
+
+def _read_csv_rows(path, required_columns: tuple[str, ...]) -> list[dict]:
     with path.open(newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+        rows = list(csv.DictReader(f))
+    if rows and not set(required_columns) <= rows[0].keys():
+        raise ValueError(
+            f"{path} is missing expected column(s) {set(required_columns) - rows[0].keys()} -- "
+            "its header row is likely missing or the file was truncated externally. "
+            "Delete it (or restore it from git/a backup) and rerun the pipeline to regenerate it "
+            "with a fresh header before building this report."
+        )
+    return rows
 
 
-def _rejection_reason_counts() -> dict[str, int]:
+def _parse_timestamp(value: str) -> datetime:
+    return datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=timezone.utc)
+
+
+def _latest_run_batch_ids(batch_metrics: list[dict]) -> set[int]:
+    """Batch ids belonging to the most recent run, per the module docstring above."""
+    if not batch_metrics:
+        return set()
+    start_index = 0
+    for i in range(1, len(batch_metrics)):
+        gap = (_parse_timestamp(batch_metrics[i]["timestamp"])
+               - _parse_timestamp(batch_metrics[i - 1]["timestamp"])).total_seconds()
+        if gap > _RUN_GAP_THRESHOLD_SECONDS:
+            start_index = i
+    return {int(r["batch_id"]) for r in batch_metrics[start_index:]}
+
+
+def _rejection_reason_counts(batch_ids: set[int]) -> dict[str, int]:
     rejected_files = sorted(glob.glob(str(REJECTED_DIR / "rejected_batch_*.csv")))
+    relevant_files = [
+        path for path in rejected_files
+        if (m := _REJECTED_FILENAME_RE.search(path)) and int(m.group(1)) in batch_ids
+    ]
     all_reasons = reduce(
         lambda reasons, path: reasons + pd.read_csv(path)["validation_reason"].tolist(),
-        rejected_files, [],
+        relevant_files, [],
     )
     return reduce_reasons_to_counts(all_reasons)
 
@@ -80,14 +126,20 @@ def _plot_latency(batch_metrics: list[dict]) -> None:
 
 
 def build_report() -> str:
-    row_counts = _read_csv_rows(BATCH_ROW_COUNTS_PATH)
-    batch_metrics = _read_csv_rows(METRICS_LOG_PATH)
-    reason_counts = _rejection_reason_counts()
+    all_batch_metrics = _read_csv_rows(METRICS_LOG_PATH, _METRICS_COLUMNS)
+    latest_run_ids = _latest_run_batch_ids(all_batch_metrics)
+    row_counts = [
+        r for r in _read_csv_rows(BATCH_ROW_COUNTS_PATH, _ROW_COUNTS_COLUMNS)
+        if int(r["batch_id"]) in latest_run_ids
+    ]
+    batch_metrics = [r for r in all_batch_metrics if int(r["batch_id"]) in latest_run_ids]
+    reason_counts = _rejection_reason_counts(latest_run_ids)
 
     total_received = sum(int(r["received"]) for r in row_counts)
     total_inserted = sum(int(r["inserted"]) for r in row_counts)
     total_rejected = sum(int(r["rejected"]) for r in row_counts)
     num_batches = len(row_counts)
+    avg_received_per_batch = total_received / num_batches if num_batches else 0
 
     durations_s = [float(r["batch_duration_ms"]) / 1000 for r in batch_metrics]
     warm_durations_s = durations_s[1:] or durations_s  # skip batch 0's one-time startup cost
@@ -148,8 +200,9 @@ Every rejected row is kept, not deleted -- see the CSV files under `data/rejecte
 - **Setup:** a single local machine (Spark `local[*]`, one PostgreSQL instance), not a distributed cluster.
   Absolute throughput numbers would differ on production-scale hardware; the relative behavior
   (near-constant per-batch latency, low rejection rate) is what matters here.
-- **Batch size:** 30 events per file, one file read per micro-batch (`maxFilesPerTrigger=1`),
-  new files arriving roughly every 3 seconds against a 5-second trigger interval.
+- **Batch size:** averaged {avg_received_per_batch:.0f} events per micro-batch this run
+  ({MAX_FILES_PER_TRIGGER} file(s) read per micro-batch), with a trigger interval of
+  {STREAM_TRIGGER_INTERVAL}.
 - **Batch duration** comes from Spark's own `StreamingQueryListener` progress events
   (`logs/batch_metrics.csv`). **Received/inserted/rejected counts** come from the sink itself
   (`logs/batch_row_counts.csv`), which is the authoritative source -- Spark's self-reported
