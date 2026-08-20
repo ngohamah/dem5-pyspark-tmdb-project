@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .DS_Store
+IMPLEMENTATION_MAP.md
 
 # Local secrets -- copy .env.example to .env and fill in your own password
 .env
