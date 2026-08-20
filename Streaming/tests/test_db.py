@@ -12,6 +12,7 @@ teardown DELETE.
 """
 from __future__ import annotations
 
+import csv
 import getpass
 import uuid
 from datetime import datetime, timezone
@@ -19,6 +20,7 @@ from datetime import datetime, timezone
 import psycopg2
 import pytest
 
+from src.streaming_pipeline import sink
 from src.streaming_pipeline.config import POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT
 from src.streaming_pipeline.db import get_connection, insert_events
 
@@ -110,3 +112,77 @@ def test_insert_events_raises_and_logs_when_the_database_is_unreachable(monkeypa
         insert_events([_sample_row(str(uuid.uuid4()))])
 
     assert "Failed to insert" in caplog.text
+
+
+_BATCH_COLUMNS = [
+    "event_id", "event_time", "user_id", "session_id", "event_type", "product_id",
+    "product_name", "category", "price", "quantity", "total_amount", "processing_time",
+    "is_valid", "validation_reason",
+]
+
+
+def test_write_micro_batch_inserts_across_partitions_against_a_real_database(spark, tmp_path):
+    """End-to-end check of the mapPartitions-based sink (see sink.py): each
+    partition inserts its own valid rows and writes its own rejected-rows
+    file, independently, without the batch ever being collected onto the
+    driver as a single pandas DataFrame.
+
+    Needs a real Spark job (mapPartitions always runs in a separate Python
+    worker process, even under the single-core test session), which is why
+    this lives here rather than in test_sink.py -- Postgres can't be mocked
+    across that process boundary, so this test exercises the real database
+    instead, same as the rest of this module. For the same reason,
+    ``rejected_dir``/``row_counts_path`` are passed to ``write_micro_batch``
+    explicitly rather than monkeypatched: a worker process re-imports
+    sink.py fresh, so it would never see a patched module attribute and
+    this test would otherwise silently write into the tracked
+    logs/batch_row_counts.csv and data/rejected/ used by real runs.
+    """
+    rejected_dir = tmp_path / "rejected"
+    row_counts_path = tmp_path / "batch_row_counts.csv"
+
+    ids = [str(uuid.uuid4()) for _ in range(4)]
+    now = datetime.now(timezone.utc)
+    rows = [
+        (ids[0], now, 1, str(uuid.uuid4()), "purchase", "P001", "Wireless Mouse", "Electronics",
+         19.99, 2, 39.98, now, True, None),
+        (ids[1], now, 1, str(uuid.uuid4()), "purchase", "P001", "Wireless Mouse", "Electronics",
+         19.99, 1, 19.99, now, True, None),
+        (ids[2], now, 1, str(uuid.uuid4()), "bogus", "P001", "Wireless Mouse", "Electronics",
+         19.99, 1, None, now, False, "invalid_event_type"),
+        (ids[3], now, 1, str(uuid.uuid4()), "purchase", "P001", "Wireless Mouse", "Electronics",
+         -5.0, 1, None, now, False, "invalid_price"),
+    ]
+    batch_df = spark.createDataFrame(rows, schema=_BATCH_COLUMNS).repartition(3)
+
+    try:
+        sink.write_micro_batch(batch_df, batch_id=999, rejected_dir=rejected_dir, row_counts_path=row_counts_path)
+
+        conn = get_connection()
+        try:
+            with conn.cursor() as cur:
+                cur.execute("SELECT event_id FROM events WHERE event_id = ANY(%s::uuid[])", ([ids[0], ids[1]],))
+                found_ids = {str(row[0]) for row in cur.fetchall()}
+        finally:
+            conn.close()
+        assert found_ids == {ids[0], ids[1]}
+
+        rejected_files = sorted(rejected_dir.glob("rejected_batch_999_part_*.csv"))
+        assert rejected_files
+        rejected_ids = set()
+        for path in rejected_files:
+            with path.open() as f:
+                rejected_ids.update(row["event_id"] for row in csv.DictReader(f))
+        assert rejected_ids == {ids[2], ids[3]}
+
+        with row_counts_path.open() as f:
+            counts = list(csv.DictReader(f))
+        assert counts == [{"batch_id": "999", "received": "4", "inserted": "2", "rejected": "2"}]
+    finally:
+        conn = _superuser_connection()
+        try:
+            with conn.cursor() as cur:
+                cur.execute("DELETE FROM events WHERE event_id = ANY(%s::uuid[])", (ids,))
+            conn.commit()
+        finally:
+            conn.close()
